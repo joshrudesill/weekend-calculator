@@ -42,6 +42,10 @@ app.post("/calculations", (req, res) => {
   calculations.push({ ...req.body, result: calcResult });
   res.sendStatus(201);
 });
+app.delete("/calculations", (req, res) => {
+  calculations = [];
+  res.sendStatus(202);
+});
 
 // POST /calculations
 

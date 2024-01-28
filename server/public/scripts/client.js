@@ -14,9 +14,10 @@ function getHistory() {
     .then((res) => {
       let lastRes = document.querySelector("#recentResult");
       let history = document.querySelector("#resultHistory");
+      history.innerHTML = "";
+      lastRes.innerHTML = "";
       if (res.data.length > 0) {
         lastRes.innerHTML = `<h2>${res.data.at(-1).result}</h2>`;
-        history.innerHTML = "";
         res.data.forEach(
           (row) =>
             (history.innerHTML += `<p>${row.numOne} ${row.operator} ${row.numTwo} = ${row.result}</p>`)
@@ -25,6 +26,19 @@ function getHistory() {
     })
     .catch((err) => {
       console.error(err);
+    });
+}
+function clearServer(event) {
+  axios({
+    method: "DELETE",
+    url: "/calculations",
+  })
+    .then(function (_) {
+      clearForm();
+      getHistory();
+    })
+    .catch(function (error) {
+      console.log("error", error);
     });
 }
 
