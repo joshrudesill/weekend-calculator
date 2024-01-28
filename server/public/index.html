@@ -10,20 +10,55 @@
   <body>
     <h1>Server-Side Calculator</h1>
 
+    <input placeholder="" id="calculation" disabled />
+    <button type="button" onclick="clearServer(event)">Clear Server</button>
+    <button type="button" onclick="clearForm(event)">C</button>
     <form
       data-testid="calculator"
       id="calc-form"
       onsubmit="addCalculation(event)"
+      class="calc"
     >
-      <input type="number" placeholder="First Number" id="first" required />
-      <button type="button" onclick="setOperator(event, '+')">+</button>
-      <button type="button" onclick="setOperator(event, '-')">-</button>
-      <button type="button" onclick="setOperator(event, '*')">*</button>
-      <button type="button" onclick="setOperator(event, '/')">/</button>
-      <input type="number" placeholder="Second Number" id="second" required />
+      <button type="button" onclick="setInput('7')">7</button>
+      <button type="button" onclick="setInput('8')">8</button>
+      <button type="button" onclick="setInput('9')">9</button>
+      <button
+        type="button"
+        onclick="setOperator(event, '+')"
+        data-tagtype="operator"
+      >
+        +
+      </button>
+      <button type="button" onclick="setInput('4')">4</button>
+      <button type="button" onclick="setInput('5')">5</button>
+      <button type="button" onclick="setInput('6')">6</button>
+      <button
+        type="button"
+        onclick="setOperator(event, '-')"
+        data-tagtype="operator"
+      >
+        -
+      </button>
+      <button type="button" onclick="setInput('1')">1</button>
+      <button type="button" onclick="setInput('2')">2</button>
+      <button type="button" onclick="setInput('3')">3</button>
+      <button
+        type="button"
+        onclick="setOperator(event, '*')"
+        data-tagtype="operator"
+      >
+        *
+      </button>
+      <button type="button" onclick="setInput('0')">0</button>
+      <button type="button" onclick="setInput('.')">.</button>
       <button disabled id="equals">=</button>
-      <button type="button" onclick="clearForm(event)">C</button>
-      <button type="button" onclick="clearServer(event)">Clear Server</button>
+      <button
+        type="button"
+        onclick="setOperator(event, '/')"
+        data-tagtype="operator"
+      >
+        /
+      </button>
     </form>
 
     <section data-testid="recentResult" id="recentResult">

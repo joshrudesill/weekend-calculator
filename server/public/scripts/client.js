@@ -1,6 +1,8 @@
 console.log("client.js is sourced!");
 console.log("client.js is sourced!");
 let lastOperator = "";
+let firstNumber = "";
+let secondNumber = "";
 
 function onLoad() {
   getHistory();
@@ -45,8 +47,8 @@ function clearServer(event) {
 function addCalculation(event) {
   event.preventDefault();
   let calculation = {
-    numOne: Number(document.getElementById("first").value),
-    numTwo: Number(document.getElementById("second").value),
+    numOne: Number(firstNumber),
+    numTwo: Number(secondNumber),
     operator: lastOperator,
   };
   axios({
@@ -62,29 +64,45 @@ function addCalculation(event) {
       console.log("error", error);
     });
 }
+function setInput(input) {
+  if (lastOperator === "") {
+    firstNumber += input;
+  } else {
+    secondNumber += input;
+  }
+  document.querySelector(
+    "#calculation"
+  ).value = `${firstNumber} ${lastOperator} ${secondNumber}`;
+  updateEquals();
+}
 function setOperator(event, operator) {
-  lastOperator = operator;
-  document.querySelector("#equals").disabled = false;
-  clearOperator();
+  if (firstNumber !== "" && lastOperator === "") {
+    lastOperator = operator;
+  }
 
-  event.target.classList = "selected";
+  document.querySelector(
+    "#calculation"
+  ).value = `${firstNumber} ${lastOperator} ${secondNumber}`;
 }
 function clearOperator(withEquals = false) {
   if (withEquals) {
     lastOperator = "";
     document.querySelector("#equals").disabled = true;
   }
-
-  for (let child of document.querySelector("#calc-form").children) {
-    if (child.tagName === "BUTTON") {
-      child.classList.remove("selected");
-    }
+}
+function updateEquals() {
+  if (firstNumber === "" || secondNumber === "" || lastOperator === "") {
+    document.querySelector("#equals").disabled = true;
+  } else {
+    document.querySelector("#equals").disabled = false;
   }
 }
 function clearForm() {
   document.querySelector("#equals").disabled = true;
-  document.getElementById("first").value = "";
-  document.getElementById("second").value = "";
+  document.getElementById("calculation").value = "";
+  firstNumber = "";
+  secondNumber = "";
+  lastOperator = "";
   clearOperator(true);
 }
 onLoad();

@@ -1,3 +1,10 @@
 .selected {
   background-color: tomato;
 }
+.calc {
+  display: grid;
+  width: 10%;
+  grid-template-columns: auto auto auto auto;
+  gap: 10px 10px;
+  margin-top: 15px;
+}
