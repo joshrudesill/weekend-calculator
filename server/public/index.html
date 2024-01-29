@@ -10,7 +10,12 @@
   <body>
     <h1>Server-Side Calculator</h1>
 
-    <input placeholder="" id="calculation" disabled />
+    <input
+      placeholder=""
+      data-testid="stretch-input"
+      id="calculation"
+      disabled
+    />
     <button type="button" onclick="clearServer(event)">Clear Server</button>
     <button type="button" onclick="clearForm(event)">C</button>
     <form
@@ -39,9 +44,11 @@
       >
         -
       </button>
-      <button type="button" onclick="setInput('1')">1</button>
-      <button type="button" onclick="setInput('2')">2</button>
-      <button type="button" onclick="setInput('3')">3</button>
+      <button type="button" onclick="setInput('1')" data-testid="one">1</button>
+      <button type="button" onclick="setInput('2')" data-testid="two">2</button>
+      <button type="button" onclick="setInput('3')" data-testid="three">
+        3
+      </button>
       <button
         type="button"
         onclick="setOperator(event, '*')"
